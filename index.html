@@ -14,7 +14,7 @@
         
         body {
             font-family: 'Noto Serif SC', serif;
-            background: linear-gradient(135deg, #f5c3d4 0%, #b5e8e0 50%, #d4c2f5 100%);
+            background: linear-gradient(135deg, #fff9c4 0%, #f5c3d4 20%, #b5e8e0 60%, #fff9c4 100%);
             min-height: 100vh;
             padding: 20px;
             display: flex;
@@ -37,8 +37,9 @@
         h1 {
             font-size: 2.5rem;
             font-weight: 700;
-            color: #5a4b81;
+            color: #8a6d3b;
             margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
         }
         
         .button-container {
@@ -49,21 +50,27 @@
         
         .generate-btn {
             font-family: 'Noto Serif SC', serif;
-            background: linear-gradient(135deg, #ffb8d9 0%, #8ae6e0 100%);
+            background: linear-gradient(135deg, #fff176 0%, #ffeb3b 100%);
             border: none;
             border-radius: 12px;
             padding: 15px 40px;
             font-size: 1.4rem;
             font-weight: 700;
-            color: #5a4b81;
+            color: #8a6d3b;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(138, 230, 224, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
             transition: all 0.3s ease;
+            border: 2px solid rgba(255, 235, 59, 0.3);
         }
         
         .generate-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(138, 230, 224, 0.6);
+            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.6);
+            background: linear-gradient(135deg, #ffee58 0%, #fdd835 100%);
+        }
+        
+        .generate-btn:active {
+            transform: translateY(1px);
         }
         
         .generator-container {
@@ -73,21 +80,21 @@
         }
         
         .card {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 253, 231, 0.7);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(255, 204, 128, 0.2);
+            border: 1px solid rgba(255, 248, 170, 0.4);
         }
         
         .card-title {
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 15px;
-            color: #5a4b81;
+            color: #8a6d3b;
             padding-bottom: 8px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 2px solid rgba(255, 235, 59, 0.3);
         }
         
         .card-content {
@@ -99,14 +106,21 @@
             font-size: 1.2rem;
             text-align: center;
             line-height: 1.5;
-            color: #4a3b71;
+            color: #6d5c3b;
             border-radius: 10px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 248, 170, 0.3);
         }
         
         .empty-content {
-            color: #7a6b9c;
+            color: #a1887f;
             font-style: normal;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 204, 128, 0.3);
+            background: rgba(255, 253, 231, 0.8);
         }
         
         @media (min-width: 768px) {
@@ -128,6 +142,7 @@
                 flex: 1;
                 min-width: 250px;
                 max-width: 350px;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
             }
         }
         
@@ -138,6 +153,20 @@
         
         .fade-in {
             animation: fadeIn 0.3s ease forwards;
+        }
+        
+        @keyframes btnGlow {
+            0% { box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4); }
+            50% { box-shadow: 0 4px 20px rgba(255, 193, 7, 0.6); }
+            100% { box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4); }
+        }
+        
+        .btn-glow {
+            animation: btnGlow 2s ease-in-out infinite;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, rgba(255, 241, 118, 0.3) 0%, transparent 100%);
         }
     </style>
 </head>
@@ -159,12 +188,12 @@
             
             <div class="card">
                 <h2 class="card-title">脑洞情节</h2>
-                <div class="card-contentempty-content" id="plot-box">点击上方按钮生成</div>
+                <div class="card-content empty-content" id="plot-box">点击上方按钮生成</div>
             </div>
             
             <div class="card">
                 <h2 class="card-title">关键秘密</h2>
-                <div class="card-contentempty-content" id="secret-box">点击上方按钮生成</div>
+                <div class="card-content empty-content" id="secret-box">点击上方按钮生成</div>
             </div>
         </div>
     </div>
@@ -226,7 +255,7 @@
             "体内流淌着神血，但自己并不知情",
             "能听懂所有生灵的语言，包括动物植物",
             "拥有预知梦的能力，但无法控制何时发生",
-            "是传说中的天命之子，肩负重大使命"
+            "是传说中的天命之子，肩负重大使命",
             "是古代英雄的后裔，血脉中蕴含力量",
             "能与武器产生共鸣，使用任何武器都得心应手",
             "拥有真实之眼，能看破一切幻象和伪装",
@@ -254,9 +283,13 @@
                 cardElement.style.opacity = '1';
                 cardElement.style.transform = 'translateY(0)';
                 cardElement.classList.add('fade-in');
+                cardElement.classList.add('highlight');
                 
                 setTimeout(() => {
                     cardElement.classList.remove('fade-in');
+                    setTimeout(() => {
+                        cardElement.classList.remove('highlight');
+                    }, 1000);
                 }, 300);
             }, 100);
         }
@@ -273,6 +306,11 @@
             [backgroundBox, plotBox, secretBox].forEach(box => {
                 box.classList.remove('empty-content');
             });
+            
+            generateBtn.classList.add('btn-glow');
+            setTimeout(() => {
+                generateBtn.classList.remove('btn-glow');
+            }, 2000);
         }
 
         generateBtn.addEventListener('click', generateIdea);
@@ -282,6 +320,8 @@
                 generateIdea();
             }
         });
+        
+        generateBtn.classList.add('btn-glow');
     </script>
 </body>
 </html>
