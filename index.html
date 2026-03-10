@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OC随机脑洞器</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, #f5c3d4 0%, #b5e8e0 50%, #d4c2f5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 30px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: #5a4b81;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #7a6b9c;
+            font-weight: 500;
+        }
+        
+        .generator-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #5a4b81;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .card-content {
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-size: 1.4rem;
+            text-align: center;
+            line-height: 1.6;
+            color: #4a3b71;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .generate-btn {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, #ffb8d9 0%, #8ae6e0 100%);
+            border: none;
+            border-radius: 15px;
+            padding: 18px 50px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #5a4b81;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(138, 230, 224, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(138, 230, 224, 0.6);
+        }
+        
+        .generate-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .generate-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .generate-btn:hover::after {
+            opacity: 1;
+        }
+        
+        .result-count {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.1rem;
+            color: #7a6b9c;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #7a6b9c;
+            font-size: 0.9rem;
+        }
+        
+        .card-icon {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .generator-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .card {
+                max-width: 100%;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .glow {
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+            to { box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>OC随机脑洞器</h1>
+            <p class="subtitle">一键生成原创角色灵感 · 衬线优雅 · 马卡龙配色</p>
+        </header>
+        
+        <div class="generator-container">
+            <div class="card">
+                <div class="card-icon">🌌</div>
+                <h2 class="card-title">脑洞背景</h2>
+                <div class="card-content" id="background-box">点击下方按钮开始</div>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">📖</div>
+                <h2 class="card-title">脑洞情节</h2>
+                <div class="card-content" id="plot-box">等待生成中</div>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🔐</div>
+                <h2 class="card-title">关键秘密</h2>
+                <div class="card-content" id="secret-box">准备就绪</div>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <button class="generate-btn" id="generate-btn">今日之洞！</button>
+        </div>
+        
+        <div class="result-count">
+            已生成 <span id="count">0</span> 个脑洞
+        </div>
+        
+        <footer>
+            <p>OC随机脑洞器 · 衬线字体 · 马卡龙配色 · 磨砂玻璃质感</p>
+        </footer>
+    </div>
+
+    <script>
+        // 扩展数据池 - 已移除所有负面后果和双重人格
+        const backgrounds = [
+            "古代", "现代", "未来", "日式奇幻", "西式奇幻", "穿书", 
+            "星际航海", "赛博都市", "蒸汽朋克", "魔法学院", "修仙世界", 
+            "童话王国", "江湖武林", "宫廷权谋", "异世界转生", "时空交错", 
+            "虚拟现实", "神话时代", "侦探悬疑", "怪物学院", "灵异世界",
+            "学院都市", "机甲战场", "魔法国度", "精灵森林", "兽人部落",
+            "海底王国", "天空之城", "沙漠绿洲", "冰雪王国", "热带雨林"
+        ];
+        
+        const plots = [
+            "哨向设定：首席哨兵与伪装成向导的黑暗哨兵",
+            "ABO世界观：信息素无效的Omega与嗅觉过敏的Alpha",
+            "真假少爷：被调换身份的真少爷以假身份回归",
+            "契约婚姻：为应对家族危机达成协议，却逐渐假戏真做",
+            "宿敌变情人：敌对组织高层在任务中意外结盟",
+            "花吐症：唯有暗恋之人的吻才能治愈的奇异病症",
+            "双重身份：白天是普通学生，夜晚是神秘组织的王牌",
+            "时间循环：被困在同一天，每次循环都会发现新线索",
+            "灵魂互换：意外与死对头互换身体，被迫合作寻找解决方法",
+            "系统任务：绑定创作系统，必须完成指定剧情线",
+            "读心术：突然能听到他人心声，发现身边人都有秘密",
+            "强制匹配：基因匹配系统强制安排的伴侣，最初互不信任",
+            "能力觉醒：平凡生活中突然觉醒超能力，被秘密组织招募",
+            "记忆封印：重要记忆被封印，随着事件发展逐渐恢复",
+            "身份伪装：为执行任务伪装成对方最讨厌的类型",
+            "命运纠缠：多次在不同场合偶遇，发现彼此命运相连",
+            "任务搭档：被迫组队完成危险任务，从互相嫌弃到默契配合",
+            "信息素吸引：原本不合的两人发现信息素高度契合",
+            "系统绑定：意外绑定反派洗白系统，必须改变原定命运",
+            "精神力链接：意外建立精神力链接，能感知对方情绪和想法",
+            "伪装关系：为躲避追捕伪装成情侣，却引来更多关注",
+            "天赋觉醒：被认为毫无天赋，实则拥有特殊稀有天赋",
+            "记忆读取：能读取接触物品的记忆，被卷入重大事件",
+            "任务目标：接到的任务目标竟是熟悉之人，陷入两难",
+            "基因锁：体内被植入基因锁，解锁后能力大幅提升",
+            "能力复制：能短暂复制他人能力，但需付出相应代价",
+            "梦境共享：每晚进入同一梦境，在梦中共同冒险",
+            "记忆植入：发现自己的部分记忆是被植入的虚假信息",
+            "异能无效化：自身能力是使他人异能无效，被视为威胁",
+            "信息素伪装：用特殊手段伪装成其他第二性征",
+            "灵魂绑定：意外与强大存在灵魂绑定，共享生命和力量",
+            "时间暂停：能暂停时间，但每次使用都会消耗精神力",
+            "命运改写：发现自己是书中角色，试图改写既定命运",
+            "能力赋予：能将自身能力暂时赋予他人，但会暂时失去该能力",
+            "记忆交换：与他人交换部分记忆，体验对方的人生片段",
+            "存在感弱：存在感极弱，能听到许多不该知道的秘密",
+            "情感感知：能感知他人对自己的真实情感，难以被欺骗",
+            "幸运交换：能用自身运气交换想要的东西，但会暂时运气不佳",
+            "时空标记：能在时空中留下标记，随时返回标记点",
+            "能力进化：自身能力会随着使用次数逐渐进化增强",
+            "元素亲和：天生与特定元素高度亲和，能轻松操控",
+            "血脉觉醒：随着成长逐渐觉醒古老血脉中的力量",
+            "契约兽伙伴：与稀有神兽签订契约，共同成长",
+            "天赋共鸣：遇到特定之人时天赋会产生共鸣反应",
+            "记忆图书馆：脑海中有一座记忆图书馆，储存无尽知识",
+            "时空感知：能感知时空波动，预知危险来临",
+            "能量视觉：能看到常人不可见的能量流动",
+            "拟态能力：能模拟见过的任何形态和气息",
+            "共鸣连接：能与特定之人的能力产生共鸣连接",
+            "空间移动：能在短距离内自由进行空间移动"
+        ];
+        
+        const secrets = [
+            "实际上是穿越者，拥有前世记忆",
+            "真实身份是皇室遗孤，被仇家抚养长大",
+            "其实是人造人，记忆全部被植入",
+            "能够看见亡灵，但假装自己是普通人",
+            "来自敌对阵营的卧底，却在任务中动摇了决心",
+            "身怀强大力量，用特殊装置封印了自身能力",
+            "已经重生多次，每次都会选择不同的人生路径",
+            "并非人类，而是伪装成人的非人种族",
+            "掌握着足以颠覆世界的秘密，为此隐姓埋名",
+            "其实是神明的转世，记忆正在逐渐苏醒",
+            "是某个重大实验的唯一成功体",
+            "其实是虚拟世界中的AI，产生了自我意识",
+            "来自其他维度，在这个世界寻找回家的方法",
+            "是已灭绝种族的最后幸存者",
+            "灵魂与神器绑定，神器不灭则灵魂不散",
+            "能吸收他人的负面情绪转化为自身力量",
+            "血液具有特殊功效，被多方势力觊觎",
+            "是远古强者的转世，力量正在缓慢觉醒",
+            "体内流淌着神血，但自己并不知情",
+            "能听懂所有生灵的语言，包括动物植物",
+            "拥有预知梦的能力，但无法控制何时发生",
+            "实际上是时间守护者，负责修复时空异常",
+            "是传说中的天命之子，肩负重大使命",
+            "能操纵因果律，但使用限制极大",
+            "拥有无限储物空间，可存储任何物品",
+            "是古代文明的继承者，掌握失传技术",
+            "能与元素精灵沟通，获得它们的帮助",
+            "拥有绝对记忆，能记住所见所闻的一切",
+            "是星界旅行者，能自由穿梭不同世界",
+            "拥有创造小世界的能力，但还未完全掌握",
+            "是古代英雄的后裔，血脉中蕴含力量",
+            "能与武器产生共鸣，使用任何武器都得心应手",
+            "拥有真实之眼，能看破一切幻象和伪装",
+            "是龙族混血，在特定条件下会显现特征",
+            "掌握着失传的古代魔法，威力巨大",
+            "能与植物交流，控制植物生长",
+            "拥有幸运光环，总能化险为夷",
+            "是远古契约的继承者，背负着古老使命",
+            "能短暂进入他人的梦境，了解内心想法",
+            "拥有空间天赋，可创造独立储物空间",
+            "是预言中的人，但预言内容只有自己知道",
+            "能与动物签订契约，获得它们的效忠",
+            "拥有复制能力，可学习他人技能",
+            "是神器的真正主人，但神器尚未觉醒",
+            "能感知他人的情绪波动，但常常假装不知",
+            "拥有改变外貌的能力，可变成任何人",
+            "是古代王国的正统继承人，但王国已灭",
+            "掌握着失传的炼金术，可创造奇迹",
+            "能与风元素共鸣，获得风之加护",
+            "拥有看透未来的碎片影像，但时准时不准"
+        ];
+        
+        // 获取DOM元素
+        const backgroundBox = document.getElementById('background-box');
+        const plotBox = document.getElementById('plot-box');
+        const secretBox = document.getElementById('secret-box');
+        const generateBtn = document.getElementById('generate-btn');
+        const countElement = document.getElementById('count');
+        
+        // 初始化计数器
+        let count = 0;
+        countElement.textContent = count;
+        
+        // 随机选择函数
+        function getRandomItem(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+        
+        // 更新卡片内容
+        function updateCard(cardElement, content) {
+            cardElement.style.opacity = '0';
+            cardElement.style.transform = 'translateY(10px)';
+            
+            setTimeout(() => {
+                cardElement.textContent = content;
+                cardElement.style.opacity = '1';
+                cardElement.style.transform = 'translateY(0)';
+                cardElement.classList.add('fade-in');
+                
+                // 移除动画类以便下次使用
+                setTimeout(() => {
+                    cardElement.classList.remove('fade-in');
+                }, 500);
+            }, 150);
+        }
+        
+        // 生成脑洞
+        function generateIdea() {
+            const background = getRandomItem(backgrounds);
+            const plot = getRandomItem(plots);
+            const secret = getRandomItem(secrets);
+            
+            // 更新所有卡片
+            updateCard(backgroundBox, background);
+            updateCard(plotBox, plot);
+            updateCard(secretBox, secret);
+            
+            // 增加计数器
+            count++;
+            countElement.textContent = count;
+            
+            // 按钮动画效果
+            generateBtn.classList.add('glow');
+            setTimeout(() => {
+                generateBtn.classList.remove('glow');
+            }, 1500);
+        }
+        
+        // 按钮点击事件
+        generateBtn.addEventListener('click', generateIdea);
+        
+        // 初始生成一个脑洞
+        window.addEventListener('load', () => {
+            setTimeout(generateIdea, 500);
+        });
+        
+        // 添加键盘支持
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'Space' || event.code === 'Enter') {
+                generateIdea();
+            }
+        });
+        
+        // 添加卡片点击随机更新功能
+        [backgroundBox, plotBox, secretBox].forEach((card, index) => {
+            card.addEventListener('click', () => {
+                if (index === 0) {
+                    updateCard(card, getRandomItem(backgrounds));
+                } else if (index === 1) {
+                    updateCard(card, getRandomItem(plots));
+                } else {
+                    updateCard(card, getRandomItem(secrets));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
