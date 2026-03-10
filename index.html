@@ -20,186 +20,124 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             color: #333;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 800px;
             width: 100%;
-            padding: 30px;
+            padding: 20px;
         }
         
         header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
         
         h1 {
-            font-size: 3.2rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: #5a4b81;
-            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
             margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            color: #7a6b9c;
-            font-weight: 500;
-        }
-        
-        .generator-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-        
-        .card {
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            width: 100%;
-            max-width: 350px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #5a4b81;
-            text-align: center;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .card-content {
-            min-height: 180px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            font-size: 1.4rem;
-            text-align: center;
-            line-height: 1.6;
-            color: #4a3b71;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
         }
         
         .button-container {
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+            margin: 20px 0 30px 0;
         }
         
         .generate-btn {
             font-family: 'Noto Serif SC', serif;
             background: linear-gradient(135deg, #ffb8d9 0%, #8ae6e0 100%);
             border: none;
-            border-radius: 15px;
-            padding: 18px 50px;
-            font-size: 1.5rem;
+            border-radius: 12px;
+            padding: 15px 40px;
+            font-size: 1.4rem;
             font-weight: 700;
             color: #5a4b81;
             cursor: pointer;
-            box-shadow: 0 6px 20px rgba(138, 230, 224, 0.4);
+            box-shadow: 0 4px 15px rgba(138, 230, 224, 0.4);
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
         
         .generate-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(138, 230, 224, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(138, 230, 224, 0.6);
         }
         
-        .generate-btn:active {
-            transform: translateY(1px);
+        .generator-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
         
-        .generate-btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.3s;
+        .card {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
-        .generate-btn:hover::after {
-            opacity: 1;
-        }
-        
-        .result-count {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 1.1rem;
-            color: #7a6b9c;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            color: #7a6b9c;
-            font-size: 0.9rem;
-        }
-        
-        .card-icon {
-            font-size: 2.5rem;
-            text-align: center;
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
             margin-bottom: 15px;
+            color: #5a4b81;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
         
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .generator-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .card {
-                max-width: 100%;
+        .card-content {
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+            line-height: 1.5;
+            color: #4a3b71;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .empty-content {
+            color: #7a6b9c;
+            font-style: normal;
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                padding: 30px;
             }
             
             h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
+            }
+            
+            .generator-container {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .card {
+                flex: 1;
+                min-width: 250px;
+                max-width: 350px;
             }
         }
         
-        /* 动画效果 */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
         .fade-in {
-            animation: fadeIn 0.5s ease forwards;
-        }
-        
-        .glow {
-            animation: glow 1.5s ease-in-out infinite alternate;
-        }
-        
-        @keyframes glow {
-            from { box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
-            to { box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
+            animation: fadeIn 0.3s ease forwards;
         }
     </style>
 </head>
@@ -207,44 +145,31 @@
     <div class="container">
         <header>
             <h1>OC随机脑洞器</h1>
-            <p class="subtitle">一键生成原创角色灵感 · 衬线优雅 · 马卡龙配色</p>
         </header>
-        
-        <div class="generator-container">
-            <div class="card">
-                <div class="card-icon">🌌</div>
-                <h2 class="card-title">脑洞背景</h2>
-                <div class="card-content" id="background-box">点击下方按钮开始</div>
-            </div>
-            
-            <div class="card">
-                <div class="card-icon">📖</div>
-                <h2 class="card-title">脑洞情节</h2>
-                <div class="card-content" id="plot-box">等待生成中</div>
-            </div>
-            
-            <div class="card">
-                <div class="card-icon">🔐</div>
-                <h2 class="card-title">关键秘密</h2>
-                <div class="card-content" id="secret-box">准备就绪</div>
-            </div>
-        </div>
         
         <div class="button-container">
             <button class="generate-btn" id="generate-btn">今日之洞！</button>
         </div>
         
-        <div class="result-count">
-            已生成 <span id="count">0</span> 个脑洞
+        <div class="generator-container">
+            <div class="card">
+                <h2 class="card-title">脑洞背景</h2>
+                <div class="card-content empty-content" id="background-box">点击上方按钮生成</div>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-title">脑洞情节</h2>
+                <div class="card-contentempty-content" id="plot-box">点击上方按钮生成</div>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-title">关键秘密</h2>
+                <div class="card-contentempty-content" id="secret-box">点击上方按钮生成</div>
+            </div>
         </div>
-        
-        <footer>
-            <p>OC随机脑洞器 · 衬线字体 · 马卡龙配色 · 磨砂玻璃质感</p>
-        </footer>
     </div>
 
     <script>
-        // 扩展数据池 - 已移除所有负面后果和双重人格
         const backgrounds = [
             "古代", "现代", "未来", "日式奇幻", "西式奇幻", "穿书", 
             "星际航海", "赛博都市", "蒸汽朋克", "魔法学院", "修仙世界", 
@@ -319,6 +244,7 @@
             "掌握着足以颠覆世界的秘密，为此隐姓埋名",
             "其实是神明的转世，记忆正在逐渐苏醒",
             "是某个重大实验的唯一成功体",
+            "其实是虚拟世界中的AI，产生了自我意识",
             "来自其他维度，在这个世界寻找回家的方法",
             "是已灭绝种族的最后幸存者",
             "灵魂与神器绑定，神器不灭则灵魂不散",
@@ -358,27 +284,19 @@
             "能与风元素共鸣，获得风之加护",
             "拥有看透未来的碎片影像，但时准时不准"
         ];
-        
-        // 获取DOM元素
+
         const backgroundBox = document.getElementById('background-box');
         const plotBox = document.getElementById('plot-box');
         const secretBox = document.getElementById('secret-box');
         const generateBtn = document.getElementById('generate-btn');
-        const countElement = document.getElementById('count');
-        
-        // 初始化计数器
-        let count = 0;
-        countElement.textContent = count;
-        
-        // 随机选择函数
+
         function getRandomItem(array) {
             return array[Math.floor(Math.random() * array.length)];
         }
-        
-        // 更新卡片内容
+
         function updateCard(cardElement, content) {
             cardElement.style.opacity = '0';
-            cardElement.style.transform = 'translateY(10px)';
+            cardElement.style.transform = 'translateY(5px)';
             
             setTimeout(() => {
                 cardElement.textContent = content;
@@ -386,61 +304,32 @@
                 cardElement.style.transform = 'translateY(0)';
                 cardElement.classList.add('fade-in');
                 
-                // 移除动画类以便下次使用
                 setTimeout(() => {
                     cardElement.classList.remove('fade-in');
-                }, 500);
-            }, 150);
+                }, 300);
+            }, 100);
         }
-        
-        // 生成脑洞
+
         function generateIdea() {
             const background = getRandomItem(backgrounds);
             const plot = getRandomItem(plots);
             const secret = getRandomItem(secrets);
             
-            // 更新所有卡片
             updateCard(backgroundBox, background);
             updateCard(plotBox, plot);
             updateCard(secretBox, secret);
             
-            // 增加计数器
-            count++;
-            countElement.textContent = count;
-            
-            // 按钮动画效果
-            generateBtn.classList.add('glow');
-            setTimeout(() => {
-                generateBtn.classList.remove('glow');
-            }, 1500);
+            [backgroundBox, plotBox, secretBox].forEach(box => {
+                box.classList.remove('empty-content');
+            });
         }
-        
-        // 按钮点击事件
+
         generateBtn.addEventListener('click', generateIdea);
-        
-        // 初始生成一个脑洞
-        window.addEventListener('load', () => {
-            setTimeout(generateIdea, 500);
-        });
-        
-        // 添加键盘支持
+
         document.addEventListener('keydown', (event) => {
             if (event.code === 'Space' || event.code === 'Enter') {
                 generateIdea();
             }
-        });
-        
-        // 添加卡片点击随机更新功能
-        [backgroundBox, plotBox, secretBox].forEach((card, index) => {
-            card.addEventListener('click', () => {
-                if (index === 0) {
-                    updateCard(card, getRandomItem(backgrounds));
-                } else if (index === 1) {
-                    updateCard(card, getRandomItem(plots));
-                } else {
-                    updateCard(card, getRandomItem(secrets));
-                }
-            });
         });
     </script>
 </body>
